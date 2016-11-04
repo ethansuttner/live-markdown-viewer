@@ -1,23 +1,28 @@
 var React = require('react');
-
+var marked = require('marked');
 var MarkdownInput = React.createClass({
-  render: function () {
-    
-    var pages = ['home', 'blog', 'pics', 'bio', 'art', 'shop', 'about', 'contact'];
-    var navLinks = pages.map(function(page){
-      return (
-        <a href={'/' + page}>
-          {page}
-        </a>
-      );
+  getInitialState: function () {
+    return {
+      userInput: "",
+      markedDownOutput: ""
+    };
+  },
+  handleUserInput: function (e) {
+    var inputString = e.target.value;
+    this.setState({
+      userInput: inputString,
+      markedDownOutput: marked(inputString) 
     });
+  },
 
+  render: function () {   
+    var output = this.state.markedDownOutput;
     return (
-	<div>
-	<nav>{navLinks}</nav> 
-	<input></input>
-	</div>
-	);
+      <div>
+        <textarea id="input-text" type="text" onChange={this.handleUserInput} value={this.state.userInput}/>
+        <div class="output-markdown" dangerouslySetInnerHTML={{__html: output}} />
+      </div>
+    );
   }
 });
 
