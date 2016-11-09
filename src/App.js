@@ -1,12 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MarkdownOutput from './MarkdownOutput'
 import MarkdownInput from './MarkdownInput'
+import {Jumbotron, Col, Row} from 'react-bootstrap'
 let App = React.createClass({
   getInitialState: function () {
     return {
-      userInput: ""
+      userInput: "**this** is a *cool* <span style='color: red;'>test</span>"
     };
   },
   handleUserInput: function (e) {
@@ -14,20 +14,26 @@ let App = React.createClass({
     this.setState({
       userInput: inputString
     });
+      // <img src={logo} className="App-logo" alt="logo" />
   },
   render() {
-    console.log(this.state);
     return (
 	  <div className="App"> 
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
-        <h3>Ethan Suttner</h3>
+      <Row>
+        <div className="App-header">
+          <Col xs={10} xsOffset={1} >
+            <Jumbotron className="jumbotron-banner">
+              <h2>Welcome to Live Markdown Viewer</h2>
+              <p>This is a simple app built with React</p>
+            </Jumbotron>
+            <MarkdownInput handleInput={this.handleUserInput} input={this.state.userInput} />
+            <MarkdownOutput value={this.state.userInput} /> 
+          </Col>
         </div>
-	  <MarkdownInput handleInput={this.handleUserInput} input={this.state.userInput} />
-      <MarkdownOutput value={this.state.userInput} /> 
-      </div>
+      </Row>
+    </div>
     );
   }
 })
 export default App;
+
