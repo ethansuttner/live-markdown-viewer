@@ -32,7 +32,7 @@ alert(s);
           <Col xs={12} xsOffset={0} >
             <Jumbotron className="jumbotron-banner">
               <h2>Welcome to Live Markdown Viewer</h2>
-              <p>Practice Writing Markdown! A simple Here React</p>
+              <p>Practice Writing Markdown!</p>
             </Jumbotron>
             <Row>
               <Col xs={5}>
